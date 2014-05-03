@@ -73,27 +73,27 @@ namespace TTT_CLR {
 				serverSocket->Shutdown(SocketShutdown::Both);
 				serverSocket->Close();
 			}
-		   } // end RunServer
+		} // end RunServer
 		ref class Service
 		{
 		private: Socket^ serverSocket;
-				Form1^ theForm;
-				NetworkStream^ netStream;
-				BinaryReader^ br;
-				BinaryWriter^ bw;
+				 Form1^ theForm;
+				 NetworkStream^ netStream;
+				 BinaryReader^ br;
+				 BinaryWriter^ bw;
 		public: Service(Socket^ aSocket, Form1^ form)
-			{
-				serverSocket = aSocket;
-				theForm = form;
-				netStream = gcnew NetworkStream(serverSocket);
-				br = gcnew BinaryReader(netStream);
-				bw = gcnew BinaryWriter(netStream);
-			}
-			void DoService()
-			{
-				String^ threadName = Thread::CurrentThread->Name;
-				bw -> Write("\n" + threadName + ": Client connected.");
-				try {
+				{
+					serverSocket = aSocket;
+					theForm = form;
+					netStream = gcnew NetworkStream(serverSocket);
+					br = gcnew BinaryReader(netStream);
+					bw = gcnew BinaryWriter(netStream);
+				}
+				void DoService()
+				{
+					String^ threadName = Thread::CurrentThread->Name;
+					bw -> Write("\n" + threadName + ": Client connected.");
+					try {
 						int value1, value2;
 						int result;
 						while (true) //until end of input
@@ -106,13 +106,13 @@ namespace TTT_CLR {
 							bw->Write(result);						
 						}
 					}
-				catch (EndOfStreamException^ e)
+					catch (EndOfStreamException^ e)
 					{ //client finished
 						theForm->richTextBox1->Text = theForm->richTextBox1->Text+threadName + ": Client disconnected\n";
 						netStream->Close();
 					}
-				
-			} // end DoService
+
+				} // end DoService
 		}; // end class Service
 
 	protected:
@@ -140,15 +140,15 @@ namespace TTT_CLR {
 	private: System::Windows::Forms::Button^  btnClose;
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
 	private: System::Windows::Forms::VScrollBar^  vScrollBar1;
-		 /// <summary>
-		/// Required designer variable.
-		/// </summary>
-		System::ComponentModel::Container ^components;
+			 /// <summary>
+			 /// Required designer variable.
+			 /// </summary>
+			 System::ComponentModel::Container ^components;
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+			 /// <summary>
+			 /// Required method for Designer support - do not modify
+			 /// the contents of this method with the code editor.
+			 /// </summary>
 	private: void InitializeComponent(void) {
 				 this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 				 this->vScrollBar1 = (gcnew System::Windows::Forms::VScrollBar());
@@ -181,52 +181,52 @@ namespace TTT_CLR {
 
 			 }
 #pragma endregion
-};//end Form1
+	};//end Form1
 
-/*
-public class Person
-{
-internal: Socket^ connection;
-private: NetworkStream^ socketStream;
-private: Server^ server;
-private: BinaryWriter^ writer;
-private: BinaryReader^ reader;
+	/*
+	public class Person
+	{
+	internal: Socket^ connection;
+	private: NetworkStream^ socketStream;
+	private: Server^ server;
+	private: BinaryWriter^ writer;
+	private: BinaryReader^ reader;
 
-private: int number;
-private: char mark;
-internal: Bool^ threadSuspended = true;
+	private: int number;
+	private: char mark;
+	internal: Bool^ threadSuspended = true;
 
-      // constructor requiring Socket, Server and int objects as arguments
-public: Player(Socket socket, Server serverValue, int newNumber)
-		{
-			mark = (newNumber == 0 ? 'X' : 'O');
-			connection = socket;
-			server = serverValue;
-			number = newNumber;
+	// constructor requiring Socket, Server and int objects as arguments
+	public: Player(Socket socket, Server serverValue, int newNumber)
+	{
+	mark = (newNumber == 0 ? 'X' : 'O');
+	connection = socket;
+	server = serverValue;
+	number = newNumber;
 
-			//network stream object for Socket
-			socketStream = gcnew NetworkStream(connection);
+	//network stream object for Socket
+	socketStream = gcnew NetworkStream(connection);
 
-			//streams for writing/reading bytes
-			writer = gcnew BinaryWriter(socketStream);
-			reader = gcnew BinaryReader(socketStream);
-		}
-public: 
+	//streams for writing/reading bytes
+	writer = gcnew BinaryWriter(socketStream);
+	reader = gcnew BinaryReader(socketStream);
+	}
+	public: 
 	void otherPlayerMoved(int location)
 	{
-		//signal move
-		writer->write("Opponent moved:");
-		writer->write(location);
+	//signal move
+	writer->write("Opponent moved:");
+	writer->write(location);
 	}
 	//player makes moves/receives moves from other player
-public:
+	public:
 	void Run()
 	{
-		bool done = false;
-		server->Display("Player " + (number == 0 ? 'X' : 'O') + " connected.");
+	bool done = false;
+	server->Display("Player " + (number == 0 ? 'X' : 'O') + " connected.");
 	}
-}
-*/
+	}
+	*/
 }//end namespace
 
 
